@@ -6,7 +6,6 @@
 #define randnum(min,max) (rand()%(max-min + 1) + min)
 #define timeval_to_msec(t) ((t).tv_sec*1000 + (t).tv_usec/1000)
 
-#define MAX_ZNAKE_BODY 50
 #define MAP_EDGE_WIDTH 1
 #define MAP_EDGE_HEIGHT 2
 #define DEFAULT_SPEED_DELAY 300.0f
@@ -30,7 +29,7 @@ struct znake_t {
     struct vector2d  **body;
     struct vector2d  tail;
     enum znake_dir_t direction;
-    int body_length;
+    int body_length, max_size;
 };
 
 
@@ -53,7 +52,7 @@ struct map_t {
     mvwaddch(map->win, y, x, c)
 
 
-void znake_init(struct znake_t *znake, int x, int y);
+void znake_init(struct znake_t *znake, int x, int y, int max_size);
 void znake_reset(struct znake_t *znake, int x, int y);
 void znake_update(struct znake_t *znake);
 void znake_add_body(struct znake_t *znake);

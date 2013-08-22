@@ -5,10 +5,11 @@
 #include "znake.h"
 
 
-void znake_init(struct znake_t *znake, int x, int y)
+void znake_init(struct znake_t *znake, int x, int y, int max_size)
 {
-    znake->body = malloc(sizeof(struct vector2d *) * MAX_ZNAKE_BODY);
+    znake->body = malloc(sizeof(struct vector2d *) * max_size);
     znake->body_length = 0;
+    znake->max_size = max_size;
     znake_reset(znake, x, y);
 }
 
@@ -64,7 +65,7 @@ void znake_update(struct znake_t *znake)
 
 void znake_add_body(struct znake_t *znake)
 {
-    if(znake->body_length < MAX_ZNAKE_BODY) {
+    if(znake->body_length < znake->max_size) {
         znake->body[znake->body_length] = malloc(sizeof(struct vector2d));
         znake->body[znake->body_length]->x = znake->tail.x;
         znake->body[znake->body_length]->y = znake->tail.y;
@@ -180,7 +181,7 @@ void map_init(struct map_t *map, int x, int y, int w, int h)
     nodelay(map->win, TRUE);
     keypad(map->win, TRUE);
     curs_set(0);
-    znake_init(&map->znake, map->half_size.x, map->half_size.y);
+    znake_init(&map->znake, map->half_size.x, map->half_size.y, w*h);
     map_reset(map);
 }
 
@@ -203,9 +204,22 @@ void map_lose(struct map_t *map)
 static int map_snake_edges_collision(struct map_t *map)
 {
     struct znake_t *znake = &map->znake;
-    if((znake->head.x < map->position.x) || (znake->head.y < map->position.y)  ||
-       (znake->head.x >= (map->size.x + map->position.x)) || (znake->head.y >= (map->size.y + map->position.y))) {
+    /*if((znake->head.x < 0) || (znake->head.y < 0)  ||
+       (znake->head.x >= map->size.x) || (znake->head.y >= map->size.y)) {
             return 1;
+    }*/
+
+    if(znake->head.x < 0) {
+        znake->head.x = map->size.x-1;
+    }
+    if(znake->head.x >= map->size.x) {
+        znake->head.x = 0;
+    }
+    if(znake->head.y < 0) {
+        znake->head.y = map->size.y-1;
+    }
+    if(znake->head.y >= map->size.y) {
+        znake->head.y = 0;
     }
     return 0;
 }
@@ -218,7 +232,7 @@ void map_update(struct map_t *map)
     gettimeofday(&map->current_time, NULL);
     timersub(&map->current_time, &map->old_time, &map->delta_time);
     if(timeval_to_msec(map->delta_time) >= map->speed_delay) {
-        if(map_snake_edges_collision(map) || znake_self_collision(&map->znake)) {
+        if(znake_self_collision(&map->znake) || map_snake_edges_collision(map) ) {
             map_lose(map);
             map_reset(map);
             redrawwin(map->win);

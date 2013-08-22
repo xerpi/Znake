@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     srand (time(NULL));
     struct map_t map;
-    map_init(&map, 0, 0, 21, 21);
+    map_init(&map, 0, 0, 37, 17);
 
     while(map.running) {
         map_update(&map);

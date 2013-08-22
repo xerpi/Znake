@@ -1,17 +1,17 @@
 # depslib dependency file v1.0
-1377119048 source:/home/xerpi/Escritorio/Znake/main.c
+1377180903 source:/home/xerpi/Escritorio/Znake/main.c
 	<ncurses.h>
 	<time.h>
 	<stdlib.h>
 	"znake.h"
 
-1377119865 source:/home/xerpi/Escritorio/Znake/src/znake.c
+1377181581 source:/home/xerpi/Escritorio/Znake/src/znake.c
 	<stdlib.h>
 	<unistd.h>
 	<ncurses.h>
 	<sys/time.h>
 	"znake.h"
 
-1377119919 /home/xerpi/Escritorio/Znake/include/znake.h
+1377181703 /home/xerpi/Escritorio/Znake/include/znake.h
 	<sys/time.h>
 
