@@ -36,7 +36,7 @@
 			<Add library="ncurses" />
 		</Linker>
 		<Unit filename="include/znake.h" />
-		<Unit filename="main.c">
+		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/znake.c">

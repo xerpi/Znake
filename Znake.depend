@@ -5,7 +5,7 @@
 	<stdlib.h>
 	"znake.h"
 
-1377181581 source:/home/xerpi/Escritorio/Znake/src/znake.c
+1377181722 source:/home/xerpi/Escritorio/Znake/src/znake.c
 	<stdlib.h>
 	<unistd.h>
 	<ncurses.h>
@@ -14,4 +14,10 @@
 
 1377181703 /home/xerpi/Escritorio/Znake/include/znake.h
 	<sys/time.h>
+
+1377180903 source:/home/xerpi/Escritorio/Znake/src/main.c
+	<ncurses.h>
+	<time.h>
+	<stdlib.h>
+	"znake.h"
 
