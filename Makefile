@@ -8,6 +8,11 @@ OBJS=  $(addprefix $(ODIR)/, $(notdir $(CFILES:.c=.o)))
 LIBS = -lncurses
 CFLAGS = 
 
+all: directories $(OUT)
+
+directories:
+	mkdir -p $(ODIR)
+
 $(OUT): $(OBJS)
 	gcc $(OBJS) -o $(OUT) $(LIBS)
 	
